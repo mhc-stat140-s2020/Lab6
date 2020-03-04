@@ -1,0 +1,153 @@
+---
+title: "Lab 6"
+author: "YOUR NAME HERE"
+date: "3/4/2020"
+output: pdf_document
+---
+
+## Binomial Distribution
+
+### Conditions
+
+1. Independent trials
+2. Each outcome can be classified as a success or failure.
+3. Fixed number of trials, n
+4. Same probability of success, p, for each trial
+
+### R Code
+
+- $P(X = k)=$dbinom(x=k, size=n, prob=p)
+- $P(X \leq k)=$pbinom(q=k, size=n, prob=p, lower.tail=TRUE)
+- $P(X > k)=$pbinom(q=k, size=n, prob=p, lower.tail=FALSE)
+- rbinom(n=number of simulations, size=n, prob=p)
+
+### Problem description
+
+Let's suppose you want to play a card game. This game will be played with a standard deck of 52 cards: 13 hearts, 13 diamonds, 13 clubs, and 13 spades. Each time you play this game, you start with a well-shuffled deck, cards facedown, and you guess the suit of the card on top. You pay in `$1` to play each time. If you guess correctly, you win `$3`, thereby netting `$2`. Otherwise, you lose the dollar you paid to play the game. Suppose you play the game 10 times. 
+
+#### Consider the random variable X = number of wins. Check the four conditions to confirm that this is a binomial process.
+
+1.
+2.
+3.
+4.
+
+#### Run the following code chunk to simulate one realization of this process (one set of 10 games). We will save it as s1 so we can reference it in text (see below code chunk). This will ensure that your random output matches your description when you knit!
+
+```{r}
+s1 <- data.frame(wins=rbinom(n=1, size=10, prob=1/4))
+```
+
+In this process, we won `r s1$wins` out of 10 games. 
+
+#### Now, amend the code from the previous chunk to simulate 100 realizations of this process. Save this as s100.
+
+```{r}
+
+```
+
+#### Make a barplot of the wins from s100. Use the ggplot2 package.
+
+```{r fig.align='center'}
+
+```
+
+#### Summarize the counts from s100 using table(). If you don't remember how to use table(), look at the help file using ?table.
+
+```{r}
+
+```
+
+#### Use dbinom() to find the following 11 probabilities: 
+
+```{r}
+## P(X=0)
+
+
+## P(X=1)
+
+
+## P(X=2)
+
+
+## P(X=3)
+
+
+## P(X=4)
+
+
+## P(X=5)
+
+
+## P(X=6)
+
+
+## P(X=7)
+
+
+## P(X=8)
+
+
+## P(X=9)
+
+
+## P(X=10)
+
+
+```
+
+#### How do these exact probabilities compare to the probabilities from s100?
+
+
+
+#### Use pbinom() to find the following probabilities:
+
+```{r}
+## Probability that you win at least once: P(X >= 1)
+
+
+## Probability that you win no more than twice: P(X <= 2)
+
+
+## Probability that you win less than two times: P(X < 2)
+
+
+## Probability that you win a majority of the games: P(X >= 5)
+```
+
+Note, if you are unsure of any of your pbinom() code, you can check it by taking sums of the appropriate probabilities from dbinom() that you calculated previously.
+
+#### How do these exact probabilities compare to the probabilities from s100?
+
+#### What is the expected number of wins? Calculate this in two ways, and compare them.
+
+```{r}
+## Mean of s100:
+
+
+## Using the binomial mean: n*p
+
+
+```
+
+#### If you were to increase the number of simulations, would you expect your probabilities from your simulation to get closer to the probabilities you calculated using dbinom() and pbinom()? Why or why not?
+
+
+
+#### Since there is a cost associated with playing this game, as well as a return for winning, we are perhaps more interested in the monetary aspect of this game. Run the following code to include a column in your s100 dataframe that calculates the return for each of the simulations:
+
+```{r}
+n <- 10
+
+s100$return <- -1*n + 3*(s100$wins) 
+```
+
+#### Calculate the mean and standard deviation of s100$return.
+
+```{r}
+
+```
+
+#### Based on your calculations, do you think this is a game you should play?
+
+
